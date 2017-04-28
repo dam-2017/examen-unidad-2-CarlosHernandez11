@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Iniciar Sesión
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+ <form [formGroup]="formulario" (ngSubmit)="doLogin()" >
+  <ion-list no-lines>
+       <ion-item>
+           <ion-icon name="person" item-left isActive="true"></ion-icon>
+           <ion-input type="text" value="" placeholder="Nombre de usuario" formControlName="username"></ion-input>  
+       </ion-item>
+       <ion-item *ngIf="formulario.get('username').errors && formulario.get('username').dirty">
+          <p *ngIf="formulario.get('username').hasError('required')"> Este campo es obligatorio</p>
+          <p *ngIf="formulario.get('username').hasError('minlength')"> La longitud minima de este campo es de 6 caracteres</p>
+          <p *ngIf="formulario.get('username').hasError('pattern')"> Este campo <b>SOLO ACEPTA</b> minusculas</p>
+       </ion-item>       
+       <ion-item>
+           <ion-icon name="unlock" item-left isActive="true"></ion-icon>
+           <ion-input type="password" value="" placeholder="Contraseña" formControlName="pass"></ion-input>  
+       </ion-item>
+       <ion-item *ngIf="formulario.get('pass').errors && formulario.get('pass').dirty">
+          <p *ngIf="formulario.get('pass').hasError('required')"> Este campo es obligatorio</p>
+          <p *ngIf="formulario.get('pass').hasError('minlength')"> La longitud minima de este campo es de 8 caracteres</p>
+          <p *ngIf="formulario.get('pass').hasError('pattern')"> Este campo debe tener al menos un simbolo (|@#%&) y un digito</p>
+       </ion-item>
+  </ion-list>
+  <button ion-button type="submit"> Ingresar</button>
+ </form>
+</ion-content>
